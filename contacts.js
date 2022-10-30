@@ -25,19 +25,21 @@ async function removeContact(contactId) {
     const remainingСontacts = contacts.filter(contact => contact.id !== contactId.toString());
     contacts = remainingСontacts;
     await fs.writeFile(contactsPath, JSON.stringify(contacts));
+    return contactToDelete;
 };
 
 async function addContact(name, email, phone) {
     const id = nanoid();
-    const contact = { id, name, email, phone };
-    let contacts = await listContacts();
-    contacts.push(contact);
+    const newContact = { id, name, email, phone };
+    const contacts = await listContacts();
+    contacts.push(newContact);
     await fs.writeFile(contactsPath, JSON.stringify(contacts));
+    return newContact;
 };
 
 module.exports = {
     listContacts,
     getContactById,
     removeContact,
-    addContact
+    addContact,
 };
