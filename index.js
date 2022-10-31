@@ -22,12 +22,12 @@ async function invokeAction({ action, id, name, email, phone }) {
             console.table(getContacts);
             break;
         case "add":
-            await contacts.addContact(name, email, phone);
-            console.log(`${name} has been added to your contact list`);
+            const newContact = await contacts.addContact(name, email, phone);
+            console.log("Added contact:", newContact);
             break;
         case "remove":
-            await contacts.removeContact(id);
-            console.log(`Сontact with id ${id} has been removed from your list`);
+            const contactToDelete = await contacts.removeContact(id);
+            console.log("Removed contact:", contactToDelete);
             break;
         default:
             console.warn("\x1B[31m Unknown action type!");
