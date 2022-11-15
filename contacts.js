@@ -17,14 +17,13 @@ async function getContactById(contactId) {
 };
 
 async function removeContact(contactId) {
-    let contacts = await listContacts();
+    const contacts = await listContacts();
     const contactToDelete = contacts.find(contact => contact.id === contactId.toString());
     if (!contactToDelete) {
         return null;
     };
     const remainingСontacts = contacts.filter(contact => contact.id !== contactId.toString());
-    contacts = remainingСontacts;
-    await fs.writeFile(contactsPath, JSON.stringify(contacts));
+    await fs.writeFile(contactsPath, JSON.stringify(remainingСontacts));
     return contactToDelete;
 };
 
